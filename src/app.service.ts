@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Template } from './template';
+import got from 'got';
 
 @Injectable()
 export class AppService {
@@ -18,5 +20,14 @@ export class AppService {
 
   getHello(): string {
     return this.defaultMessage;
+  }
+
+  async forward(templateId: string) {
+    const template = new Template(templateId);
+    const target = template.run();
+    console.log(target);
+    // TODO forward
+    const ret = got.post('', {});
+    console.log(ret);
   }
 }
